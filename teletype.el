@@ -40,16 +40,17 @@
      (teletype-char strchar short-pause long-pause))
    (string-to-list str)))
  
-(defun teletype-demo (pause-between-keys pause-between-rows buffer-title text)
-  "Print characters with a pause between each character."
+(defun teletype-in-new-buffer (pause-between-keys pause-between-rows buffer-title text)
+  "Create a new buffer, print text in it one character at a time,
+with a pause between each character."
   (switch-to-buffer (get-buffer-create buffer-title))
   (erase-buffer)
   (teletype-text text pause-between-keys pause-between-rows))
  
 (defun teletype-run-demo ()
-  "Demonstrate teletyping."
+  "Demonstrate teletyping by using the `teletype-in-new-buffer' function."
   (interactive)
-  (teletype-demo
+  (teletype-in-new-buffer
    0.1
    0.5
    "Emacs teletype demo"
@@ -62,7 +63,7 @@
     " If this demo annoys you, stop it with C-g.\n\n"
     " To run your own demo, you may load teletype.el and\n"
     "execute the following LISP function:\n\n"
-    " (teletype-demo 0.1 0.5 demo-title all-your-text)\n\n"
+    " (teletype-in-new-buffer 0.1 0.5 demo-title all-your-text)\n\n"
     "Future improvements could be:\n\n"
     " - read text from file\n"
     " - a resumable \"pause\" key\n"
