@@ -64,8 +64,8 @@ with a pause between each character."
     " To run your own demo, you may load teletype.el and\n"
     "execute the following LISP function:\n\n"
     " (teletype-in-new-buffer 0.1 0.5 demo-title all-your-text)\n\n"
+    "or use the interactive command `teletype-file'.\n\n"
     "Future improvements could be:\n\n"
-    " - read text from file\n"
     " - a resumable \"pause\" key\n"
     " - support for text coloring\n"
     " - support for typewriter sound (tick-tick-tick)\n"
@@ -75,3 +75,20 @@ with a pause between each character."
     " Hope you enjoyed, regards.\n\n"
     " The Software Bin\n"
     " http://github.com/thesoftwarebin\n")))
+
+(defun teletype-file ()
+  "Ask for a filename, a cps rate, a long-pause factor,
+type the file on screen."
+  (interactive
+  (let (
+	(filename (read-file-name "Choose a filename: " "teletype-test.txt"))
+	(cps (read-number "Choose a cps rate: " 10))
+	(lpfactor (read-number "Choose a long-pause factor: " 4)))
+    (teletype-in-new-buffer
+     (/ 1.0 cps)
+     (* (/ 1.0 cps) lpfactor)
+     (concat "Teletyping " filename "...")
+     (with-temp-buffer
+       (insert-file-contents filename)
+       (buffer-string)))
+    (message "Teletyping completed."))))
