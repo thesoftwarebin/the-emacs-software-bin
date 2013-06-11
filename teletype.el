@@ -80,15 +80,15 @@ with a pause between each character."
   "Ask for a filename, a cps rate, a long-pause factor,
 type the file on screen."
   (interactive
-  (let (
-	(filename (read-file-name "Choose a filename: " "teletype-test.txt"))
-	(cps (read-number "Choose a cps rate: " 10))
-	(lpfactor (read-number "Choose a long-pause factor: " 4)))
-    (teletype-in-new-buffer
-     (/ 1.0 cps)
-     (* (/ 1.0 cps) lpfactor)
-     (concat "Teletyping " filename "...")
-     (with-temp-buffer
-       (insert-file-contents filename)
-       (buffer-string)))
-    (message "Teletyping completed."))))
+   (let (
+	 (filename-to-type (read-file-name "Choose a filename: " nil "teletype-test.txt" t "teletype-test.txt"))
+	 (cps (read-number "Choose a cps rate: " 10))
+	 (lpfactor (read-number "Choose a long-pause factor: " 4)))
+     (teletype-in-new-buffer
+      (/ 1.0 cps)
+      (* (/ 1.0 cps) lpfactor)
+      (concat "Teletyping " filename-to-type "...")
+      (with-temp-buffer
+	(insert-file-contents filename-to-type)
+	(buffer-string)))
+     (message "Teletyping completed."))))
