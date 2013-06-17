@@ -6,12 +6,12 @@ For a more detailed description of regex and regex group, see
 
 Usage example:
 
-(`concat'
+(concat
  \"Exchange rate for EUR to JPY: \"
- (`extract-string-from-webpage'
+ (extract-string-from-webpage
   \"http://it.finance.yahoo.com/echarts?s=EURJPY%3DX\" ; pageurl
-  \"<span id=\"yfs_l10_eurjpy=x\">\\([0-9]+,[0-9]+\\)\"    ; regexp
-  1                                                  ; regex-group-nr
+  \"<span id=\\\"yfs_l10_eurjpy=x\\\">\\\\([0-9]+,[0-9]+\\\\)\" ; regexp
+  1 ; regex-group-nr
   ))
 "
   (let
