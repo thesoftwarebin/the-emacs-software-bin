@@ -75,7 +75,7 @@ Works both for ascendent and descendent patterns."
   "Insert in current buffer the list of strings ALIST.
 Generated strings are inserted row by row. See `slc/s+'
 and `slcs/*'."
-  (interactive "X")
+  (interactive "XBuild expression (s+, s*, s^, s..., scase): ")
   (insert
    (mapconcat
     'identity
