@@ -1,28 +1,32 @@
 (defun extract-string-from-webpage (pageurl regexp regexp-group-nr)
-  "Retrieve HTTP page at address `pageurl', search for first occurrence
-of `regexp', return the regex group `regexp-group-nr' as a string.
-For a more detailed description of regex and regex group, see
-`re-search-forward' and `match-string'.
-
-Usage example:
-
-(concat
- \"Exchange rate for EUR to JPY: \"
- (extract-string-from-webpage
-  \"http://it.finance.yahoo.com/echarts?s=EURJPY%3DX\" ; pageurl
-  \"<span id=\\\"yfs_l10_eurjpy=x\\\">\\\\([0-9]+,[0-9]+\\\\)\" ; regexp
-  1 ; regex-group-nr
-  ))
-"
+  "Retrieve a web page at PAGEURL and return all occurrences of REGEXP.
+The regex group REGEXP-GROUP-NR may be a list of numbers if more than
+one subgroup is needed."
   (let
       (
-       (tempbuf (url-retrieve-synchronously (url-generic-parse-url pageurl)))
-       the-matched-string)
-    (with-current-buffer
-	tempbuf
+       (tempbuf    (url-retrieve-synchronously (url-generic-parse-url pageurl)))
+       (resultlist nil)
+       (grouplist  (if (listp regexp-group-nr) regexp-group-nr (list regexp-group-nr))))
+    (with-current-buffer tempbuf
       (beginning-of-buffer)
-      (re-search-forward regexp)
-      (setq the-matched-string (match-string regexp-group-nr)))
-    (kill-buffer tempbuf)
-    the-matched-string))
+      (while (re-search-forward regexp nil t)
+	(add-to-list 
+	 'resultlist 
+	 (mapcar (lambda (i) (match-string i)) grouplist))))
+    (kill-buffer tempbuf) 
+    resultlist))
 
+;; Usage example:
+;;
+;; (insert
+;;  (mapconcat
+;;   (lambda (row)
+;;     (mapconcat
+;;      'identity
+;;      row
+;;      "\t"))
+;;   (extract-string-from-webpage
+;;    "http://www.currency-iso.org/dam/downloads/dl_iso_table_a1.xml"
+;;    "<ENTITY>\\(.*?\\)</ENTITY>\\(.\\|\n\\)*?<CURRENCY>\\(.*?\\)</CURRENCY>"
+;;    '(1 3))
+;;   "\n"))
