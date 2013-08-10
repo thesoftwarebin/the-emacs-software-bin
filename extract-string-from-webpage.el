@@ -26,7 +26,7 @@ one subgroup is needed."
 ;;      row
 ;;      "\t"))
 ;;   (extract-string-from-webpage
-;;    "http://www.currency-iso.org/dam/downloads/dl_iso_table_a1.xml"
-;;    "<ENTITY>\\(.*?\\)</ENTITY>\\(.\\|\n\\)*?<CURRENCY>\\(.*?\\)</CURRENCY>"
-;;    '(1 3))
+;;    "http://www.currency-iso.org/dam/downloads/table_a1.xml"
+;;    "<CtryNm>\\(.*?\\)</CtryNm>\\(.\\|\n\\)*?<CcyNm>\\(.*?\\)</CcyNm>\\(.\\|\n\\)*?<Ccy>\\(.*?\\)</Ccy>"
+;;    '(1 3 5))
 ;;   "\n"))
