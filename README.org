@@ -11,4 +11,6 @@ My scripts and snippets for Emacs:
 - [[japanese-furigana/furigana-example.org][furigana-example.org]] - an example Org file
    to write Japanese text and optionally put furigana signs over kanji; I provided also 
    the expected [[japanese-furigana/furigana-example.pdf?raw=true][PDF output]] 
-   and [[japanese-furigana/furigana-example.html?raw=true][HTML output (note that you must download it to see it)]] of the Org example
+   and [[japanese-furigana/furigana-example.html?raw=true][HTML output source]] of the Org example;
+   due to a GitHub limitation you can't see the rendered HTML output online, you may download
+   the HTML file and open it locally with your browser
