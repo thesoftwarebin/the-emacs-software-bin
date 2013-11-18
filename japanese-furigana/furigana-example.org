@@ -1,0 +1,90 @@
+# -*- mode: org; coding: euc-jp-unix -*-
+#+TITLE: Japanese (with furigana) in Org-mode
+#+AUTHOR: http://github.com/thesoftwarebin
+#+EMAIL: andrear1979@hotmail.com
+#+OPTIONS: toc:nil author:nil date:nil email:nil texht:nil
+#+LANGUAGE: en
+
+# ============ header to enable Japanese in Org documents  =====================
+#+macro: furigana @@html:<ruby> $1<rp>(</rp><rt>$2</rt><rp>)</rp></ruby>@@@@latex:\ruby{$1}{$2}@@
+# #+LATEX_HEADER: \usepackage[a6paper,margin=0.5in]{geometry}
+#+LATEX_HEADER: \usepackage[CJK, overlap]{ruby}
+#+LATEX: \begin{CJK*}[dnp]{JIS}{min}
+# ==============================================================================
+
+* Proposed header
+#+BEGIN_SRC org
+  ,#+macro: furigana      @@html:<ruby> $1 ...
+  #  ... (same line)     <rp>(</rp><rt>$2</rt><rp>)</rp> ...
+  #  ... (same line)     </ruby>@@@@latex:\ruby{$1}{$2}@@
+  ,#+LATEX_HEADER: \usepackage[CJK, overlap]{ruby}
+  ,#+LATEX: \begin{CJK*}[dnp]{JIS}{min}
+  
+#+END_SRC
+
+* Proposed footer
+#+BEGIN_SRC org
+  ,#+LATEX: \clearpage\end{CJK*} 
+    
+#+END_SRC
+
+
+* How to use it
+
+Insert the proposed header and footer into your Org file, this will
+enable you to write Japanese text in your Org documents. Text will be
+exported correctly in HTML and PDF.
+
+You can write Japanese text (ex.: 東京) and use the proposed
+macro ~furigana~ to add furigana signs on top of a kanji. Examples:
+
+  - ~{{{furigana(水,mi zu)}}}~ \Rightarrow {{{furigana(水,mi zu)}}}
+  - ~{{{furigana(亀,かめ)}}}~ \Rightarrow {{{furigana(亀,か め)}}}
+  - ~{{{furigana(犬,いぬ)}}}~ \Rightarrow {{{furigana(犬,い ぬ)}}}
+  - ~{{{furigana(猫,ねこ)}}}~ \Rightarrow {{{furigana(猫,ね こ)}}}
+
+* Problems and limitations
+** Japanese text is suppressed in PDF title
+I don't know any solution or workaround for this yet; sorry :(.
+
+** PDF output fails if there is Japanese text in Org headlines
+This is due to a limitation of the PDF bookmarks, but there is
+a couple of suggested workarounds.
+*** workaround 1 (boring)
+Generate output to a LaTeX file instead than PDF, then replace
+~\section{<japtext>}~ into ~\section[simpletext]{japtext}~ in the
+.tex file, where ~simpletext~ is some plain ASCII text (actually
+I think that all ISO-8859-1 characters are supported as well).
+After the corrections, generate a PDF from the .tex file using =pdftex=.
+
+*** workaround 2
+Generate output to a LaTeX file instead than PDF, then in the
+.tex file replace
+#+BEGIN_SRC latex
+  \usepackage{hyperref}
+  
+#+END_SRC
+
+into 
+
+#+BEGIN_SRC org
+  \usepackage[bookmarks=false]{hyperref}
+
+#+END_SRC
+
+After the correction, generate a PDF from the .tex file using =pdftex=.
+
+*** workaround 3 disable hyperref
+This can be done by removing ~hyperref~ package from the Org
+option ~org-latex-default-packages-alist~. This will disable
+all hyperref features in the generated PDFs, so it's probably
+better *not* to remove it permanently from your Emacs init file.
+*** a better workaround could be...
+Subclass the Latex exporter so that it automatically
+behaves the same as workaround 1.
+
+# ============ footer to enable Japanese in Org documents ======================
+#+LATEX: \clearpage\end{CJK*}   
+# ==============================================================================
+
+
