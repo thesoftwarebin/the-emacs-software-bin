@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>Japanese (with furigana) in Org-mode</title>
-<!-- 2013-11-18 lun 01:15 -->
+<!-- 2013-11-18 lun 01:51 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
 <style type="text/css">
@@ -160,6 +160,7 @@ for the JavaScript code in this tag.
 </div>
 </div>
 </div>
+
 <div id="outline-container-sec-3" class="outline-2">
 <h2 id="sec-3"><span class="section-number-2">3</span> How to use it</h2>
 <div class="outline-text-2" id="text-3">
@@ -186,28 +187,50 @@ macro <code>furigana</code> to add furigana signs on top of a kanji. Examples:
 </ul>
 </div>
 </div>
+
+
 <div id="outline-container-sec-4" class="outline-2">
 <h2 id="sec-4"><span class="section-number-2">4</span> Problems and limitations</h2>
 <div class="outline-text-2" id="text-4">
 </div><div id="outline-container-sec-4-1" class="outline-3">
-<h3 id="sec-4-1"><span class="section-number-3">4.1</span> Japanese text is suppressed in PDF title</h3>
+<h3 id="sec-4-1"><span class="section-number-3">4.1</span> font size is rather small in the PDF defaults</h3>
 <div class="outline-text-3" id="text-4-1">
+<p>
+As a workaround, you could reduce page size to <code>a6paper</code>.
+Simply add the following header in the Org file:
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-org"><span style="color: #b22222;">#+LATEX_HEADER: \usepackage[a6paper,margin=0.5in]{geometry}</span>
+</pre>
+</div>
+
+<p>
+You might prefer to increase font size instead of reducing page size,
+but standard LaTex usually limits fonts to 12pt size.
+</p>
+</div>
+</div>
+<div id="outline-container-sec-4-2" class="outline-3">
+<h3 id="sec-4-2"><span class="section-number-3">4.2</span> Japanese text is suppressed in PDF title</h3>
+<div class="outline-text-3" id="text-4-2">
 <p>
 I don't know any solution or workaround for this yet; sorry :(.
 </p>
 </div>
 </div>
-<div id="outline-container-sec-4-2" class="outline-3">
-<h3 id="sec-4-2"><span class="section-number-3">4.2</span> PDF output fails if there is Japanese text in Org headlines</h3>
-<div class="outline-text-3" id="text-4-2">
+<div id="outline-container-sec-4-3" class="outline-3">
+<h3 id="sec-4-3"><span class="section-number-3">4.3</span> PDF output fails if there is Japanese text in Org headlines</h3>
+<div class="outline-text-3" id="text-4-3">
 <p>
 This is due to a limitation of the PDF bookmarks, but there is
 a couple of suggested workarounds.
 </p>
 </div>
-<div id="outline-container-sec-4-2-1" class="outline-4">
-<h4 id="sec-4-2-1"><span class="section-number-4">4.2.1</span> workaround 1 (boring)</h4>
-<div class="outline-text-4" id="text-4-2-1">
+<div id="outline-container-sec-4-3-1" class="outline-4">
+<h4 id="sec-4-3-1"><span class="section-number-4">4.3.1</span> workaround 1 (boring)</h4>
+<div class="outline-text-4" id="text-4-3-1">
 <p>
 Generate output to a LaTeX file instead than PDF, then replace
 <code>\section{&lt;japtext&gt;}</code> into <code>\section[simpletext]{japtext}</code> in the
@@ -217,9 +240,9 @@ After the corrections, generate a PDF from the .tex file using <code>pdftex</cod
 </p>
 </div>
 </div>
-<div id="outline-container-sec-4-2-2" class="outline-4">
-<h4 id="sec-4-2-2"><span class="section-number-4">4.2.2</span> workaround 2</h4>
-<div class="outline-text-4" id="text-4-2-2">
+<div id="outline-container-sec-4-3-2" class="outline-4">
+<h4 id="sec-4-3-2"><span class="section-number-4">4.3.2</span> workaround 2</h4>
+<div class="outline-text-4" id="text-4-3-2">
 <p>
 Generate output to a LaTeX file instead than PDF, then in the
 .tex file replace
@@ -245,9 +268,9 @@ After the correction, generate a PDF from the .tex file using <code>pdftex</code
 </p>
 </div>
 </div>
-<div id="outline-container-sec-4-2-3" class="outline-4">
-<h4 id="sec-4-2-3"><span class="section-number-4">4.2.3</span> workaround 2 disable hyperref</h4>
-<div class="outline-text-4" id="text-4-2-3">
+<div id="outline-container-sec-4-3-3" class="outline-4">
+<h4 id="sec-4-3-3"><span class="section-number-4">4.3.3</span> workaround 3 disable hyperref</h4>
+<div class="outline-text-4" id="text-4-3-3">
 <p>
 This can be done by removing <code>hyperref</code> package from the Org
 option <code>org-latex-default-packages-alist</code>. This will disable
@@ -257,24 +280,20 @@ better <b>not</b> to remove it permanently from your Emacs init file.
 </div>
 </div>
 
-<div id="outline-container-sec-4-2-4" class="outline-4">
-<h4 id="sec-4-2-4"><span class="section-number-4">4.2.4</span> better workarounds could be&#x2026;</h4>
-<div class="outline-text-4" id="text-4-2-4">
-<ul class="org-ul">
-<li>subclass/extend the Latex exporter so that it automatically
-behaves the same as workaround 1
-</li>
-<li>have an Org <code>#OPTIONS:</code> to disable PDF bookmarks only
-(
-</li>
-</ul>
+<div id="outline-container-sec-4-3-4" class="outline-4">
+<h4 id="sec-4-3-4"><span class="section-number-4">4.3.4</span> a better workaround could be&#x2026;</h4>
+<div class="outline-text-4" id="text-4-3-4">
+<p>
+Subclass the Latex exporter so that it automatically
+behaves the same as workaround 1.
+</p>
 </div>
 </div>
 </div>
 </div>
 </div>
 <div id="postamble" class="status">
-<p class="date">Created: 2013-11-18 lun 01:15</p>
+<p class="date">Created: 2013-11-18 lun 01:51</p>
 <p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 24.3.1 (<a href="http://orgmode.org">Org</a> mode 8.2.2)</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>

@@ -7,7 +7,6 @@
 
 # ============ header to enable Japanese in Org documents  =====================
 #+macro: furigana @@html:<ruby> $1<rp>(</rp><rt>$2</rt><rp>)</rp></ruby>@@@@latex:\ruby{$1}{$2}@@
-# #+LATEX_HEADER: \usepackage[a6paper,margin=0.5in]{geometry}
 #+LATEX_HEADER: \usepackage[CJK, overlap]{ruby}
 #+LATEX: \begin{CJK*}[dnp]{JIS}{min}
 # ==============================================================================
@@ -43,7 +42,20 @@ macro ~furigana~ to add furigana signs on top of a kanji. Examples:
   - ~{{{furigana(¸¤,¤¤¤Ì)}}}~ \Rightarrow {{{furigana(¸¤,¤¤ ¤Ì)}}}
   - ~{{{furigana(Ç­,¤Í¤³)}}}~ \Rightarrow {{{furigana(Ç­,¤Í ¤³)}}}
 
+
+
 * Problems and limitations
+** font size is rather small in the PDF defaults
+As a workaround, you could reduce page size to ~a6paper~.
+Simply add the following header in the Org file:
+
+#+BEGIN_SRC org
+  ,#+LATEX_HEADER: \usepackage[a6paper,margin=0.5in]{geometry}
+#+END_SRC
+
+You might prefer to increase font size instead of reducing page size,
+but standard LaTex usually limits fonts to 12pt size.
+
 ** Japanese text is suppressed in PDF title
 I don't know any solution or workaround for this yet; sorry :(.
 
