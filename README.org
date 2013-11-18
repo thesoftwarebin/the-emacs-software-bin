@@ -5,4 +5,7 @@ My scripts and snippets for Emacs:
 - [[extract-string-from-webpage.el][extract-string-from-webpage.el]] - retrieve a webpage and return all occurrences of a regexp
 - [[string-list-composer.el][string-list-composer.el]] - sum and product of string lists
 - [[teletype/teletype.el][teletype.el]] - teletype-like printing function for Emacs
-- [[japanese-furigana/furigana-example.org][furigana-example.org]] - an example Org file to write Japanese text, even with furigana
+- [[japanese-furigana/furigana-example.org][furigana-example.org]] - an example Org file
+   to write Japanese text and optionally put furigana signs over kanji; I provided also 
+   the expected [[japanese-furigana/furigana-example.pdf?raw=true][PDF output]] 
+   and [[japanese-furigana/furigana-example.html][HTML output]] of the Org example
