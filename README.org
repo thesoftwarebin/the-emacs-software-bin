@@ -1,16 +1,13 @@
 * the-emacs-software-bin
 
-My scripts and snippets for Emacs:
+My scripts and tiny programs for Emacs.
 
-- [[extract-string-from-webpage.el][extract-string-from-webpage.el]] - retrieve a webpage and return all occurrences of a regexp
-- [[string-list-composer.el][string-list-composer.el]] - sum and product of string lists;
-  you use it by loading it with =load-file= and call the interactive-function =slc/insert=
-  (better explanations are on the way)
-- [[teletype/teletype.el][teletype.el]] - teletype-like printing function for Emacs; see the top
-  of teletype.el for some usage explanations
-- [[japanese-furigana/furigana-example.org][furigana-example.org]] - an example Org file
-   to write Japanese text and optionally put furigana signs over kanji; I provided also 
-   the expected [[japanese-furigana/furigana-example.pdf?raw=true][PDF output]] 
-   and [[japanese-furigana/furigana-example.html?raw=true][HTML output source]] of the Org example;
-   due to a GitHub limitation you can't see the rendered HTML output online, you may download
-   the HTML file and open it locally with your browser
+  - [[file:extract-string-from-webpage.el][extract-string-from-webpage.el]] - retrieve a webpage and return all occurrences of a regexp; usage: read the docstrings by doing
+    - =M-x load-file=
+    - =extract-string-from-webpage.el RET=
+    - =C-h f teletype-in-new-buffer RET=
+    or you may also see a short demo with =M-x teletype-run-demo RET= 
+  - [[file:string-list-composer.el][string-list-composer.el]] - sum and product of string lists; usage: load it with =M-x load-file RET C-h f slc/insert RET=
+  - [[file:teletype/teletype.el][teletype.el]] - teletype-like printing function for Emacs; usage: read the docstrings by doing =M-x load-file RET C-h f teletype-in-new-buffer RET=; you may also see a short demo with =M-x teletype-run-demo= 
+  - [[file:japanese-furigana/furigana-example.org][furigana-example.org]] - an example Org file to write Japanese text and optionally put furigana signs over kanji; I provided also the expected [[file:japanese-furigana/furigana-example.pdf?raw=true][PDF output]] and [[file:japanese-furigana/furigana-example.html?raw=true][HTML output source]] of the Org example; due to a GitHub limitation you can't see the rendered HTML output online, but you may download the HTML file and open it locally with your browser
+
