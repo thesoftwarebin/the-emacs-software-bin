@@ -21,47 +21,57 @@
 ;;; Code:
 
 (defvar learnjap/kanjitable (make-hash-table :test 'equal))
+(defvar learnjap/kanatable  (make-hash-table :test 'equal))
 
 (load-file "learnjap-kanji-table.el")
+(load-file "learnjap-kana-table.el")
 
-(defun learnjap/get-properties (code)
+(defun learnjap/get-properties-kanji (code)
   (gethash code learnjap/kanjitable))
 
-(defun learnjap/get-properties-as-string (code)
-  (let ((i (learnjap/get-properties code)))
-    (if
-        (null i)
-        (format "%c\nNo information available for this character." code)
-      (format
-       "%s\nOn reading: %s\nKun reading: %s\nDefinition: %s\nStrokes: %s"
-       (plist-get i :utf8)
-       (mapconcat 'identity (plist-get i :onreadings) ", ")
-       (mapconcat 'identity (plist-get i :kunreadings) ", ")
-       (plist-get i :definition)
-       (plist-get i :strokecount)))))
+(defun learnjap/kanji-properties-to-string (i)
+  (format
+   "%s\nOn reading: %s\nKun reading: %s\nDefinition: %s\nStrokes: %s"
+   (plist-get i :utf8)
+   (mapconcat 'identity (plist-get i :onreadings) ", ")
+   (mapconcat 'identity (plist-get i :kunreadings) ", ")
+   (plist-get i :definition)
+   (plist-get i :strokecount)))
+
+(defun learnjap/get-properties-kana (code)
+  (gethash code learnjap/kanatable))
+
+(defun learnjap/kana-properties-to-string (i)
+  (format
+   "%s\n%s\nReading: %s"
+   (plist-get i :utf8)
+   (plist-get i :symbol-type)
+   (plist-get i :reading)))
+
+(defun learnjap/code-to-string (code)
+  (let* (
+         (prop 
+          (or 
+           (learnjap/get-properties-kanji code) 
+           (learnjap/get-properties-kana code))))
+    (cond ((null prop)                            (format "%c\n(no learnjap info available)" code))
+          ((null (plist-get prop :reading))       (learnjap/kanji-properties-to-string prop))
+          ((not (null (plist-get prop :reading))) (learnjap/kana-properties-to-string prop)))))
 
 (defvar learnjap/info-buffer-name "*learnjap-info*")
 
 (defun learnjap/show-learnjap-info (bufpoint)
-  "Shows kanji information for the kanji at the
-current cursor point. Information is shown in a
-buffer named \"*learnjap-info*\" (if it does not
-exist, it's created and shown at the bottom).
+  "Shows kanji information for the kanji at cursor point BUFPOINT.
+Information is shown in a buffer named \"*learnjap-info*\" (if it does
+not exist, it's created and shown at the bottom).
 
-To call the function simply use:
+Usage example:
+- M-x learnjap/show-learnjap-info RET
+- or add a shortcut key with `local-set-key'; example:
+  (local-set-key (kbd \"C-c C-c\") 'learnjap/show-learnjap-info)
 
-M-x learnjap/show-learnjap-info RET
-
-After some test usage you will probably prefer
-to set a shortcut key with `local-set-key',
-for example on mouse click:
-
-(local-set-key
-  (kbd \"<mouse-1>\")
-  'learnjap/show-learnjap-info)
-
-- TODO: add pronounce of hiragana and katakana
-- TODO: make it a minor mode
+DONE: add hiragana and katakana
+TODO: create a minor mode for learnjap
 "
   (interactive "d")
   (let
@@ -79,7 +89,7 @@ for example on mouse click:
 
     (with-current-buffer (get-buffer learnjap/info-buffer-name)
       (erase-buffer)
-      (insert (learnjap/get-properties-as-string charnum))
+      (insert (learnjap/code-to-string charnum))
       (add-text-properties 1 2  (list 'face (list :height big-jap-char-height))))))
 
 (provide 'learnjap)
