@@ -12,5 +12,4 @@ My scripts and tiny programs for Emacs.
     - =C-h f teletype-in-new-buffer RET=
     you may also see a short demo with =M-x teletype-run-demo= 
   - [[file:japanese-furigana/furigana-example.org][furigana-example.org]] - an example Org file to write Japanese text and optionally put furigana signs over kanji; I provided also the [[file:japanese-furigana/furigana-example.pdf?raw=true][expected PDF output]] and [[file:japanese-furigana/furigana-example.html?raw=true][source of expected HTML output]] of the Org example; due to a GitHub limitation you can't see the rendered HTML output online, but you may download the HTML file and open it locally with your browser
-  - [[file:learnjap/learnjap.el][learnjap.el]] - tells you the meaning and pronounciation of every kanji! download the =.el= files in the [[file:learnjap][learnjap directory]], load them with =M-x load-file RET learnjap.el RET= and read the docstrings with =C-f learnjap/show-learnjap-info RET=; TODO: add hiragana and katakana support
-    
+  - [[file:learnjap/learnjap.el][learnjap.el]] - tells you the meaning and readings of a kanji, and reading of hiragana/katakana; download the =.el= files in the [[file:learnjap][learnjap directory]], load them with =M-x load-file RET learnjap.el RET= and read the docstrings with =C-f learnjap/show-learnjap-info RET=
