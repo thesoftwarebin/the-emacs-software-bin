@@ -1,0 +1,1 @@
+Here I collect some explicative pictures for Emacs bug reports.
