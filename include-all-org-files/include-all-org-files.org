@@ -9,7 +9,7 @@
 #+COMMENT: Before CALLing include-all-org-files, you should a) copy its definition (the #+BEGIN_SRC/#+END_SRC
 #+COMMENT: block) into your org file, or alternatively b) you could include it in your Babel Library:
 #+COMMENT:
-#+COMMENT: M-x org-babel-lob-ingest RET <the_include_all_dir_filename> RET
+#+COMMENT: M-x org-babel-lob-ingest RET include-all-org-files.org RET
 #+COMMENT:
 #+COMMENT: Synopsis:
 #+COMMENT:
