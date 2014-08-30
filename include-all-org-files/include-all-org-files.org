@@ -1,19 +1,19 @@
 #+COMMENT: ---------------------------------------------------------------------------------------------------------------
 #+COMMENT: Introduction:
 #+COMMENT:  
-#+COMMENT: `include-all-dir-org-files' is a Babel CALLable block who can generate a list of #+INCLUDE statements;
+#+COMMENT: `include-all-org-files' is a Babel CALLable block who can generate a list of #+INCLUDE statements;
 #+COMMENT: useful when you want have a main.org file and several .org files to be included, one per chapter.
 #+COMMENT:
 #+COMMENT: The .org files will be included in alphabetical order.
 #+COMMENT:
-#+COMMENT: Before CALLing include-all-dir-org-files, you should a) copy its definition (the #+BEGIN_SRC/#+END_SRC
+#+COMMENT: Before CALLing include-all-org-files, you should a) copy its definition (the #+BEGIN_SRC/#+END_SRC
 #+COMMENT: block) into your org file, or alternatively b) you could include it in your Babel Library:
 #+COMMENT:
 #+COMMENT: M-x org-babel-lob-ingest RET <the_include_all_dir_filename> RET
 #+COMMENT:
 #+COMMENT: Synopsis:
 #+COMMENT:
-#+COMMENT:   #+CALL: include-all-dir-org-files(i_level=<nubmer>, i_name=<string>, i_dir=<string>) :exports none :results raw
+#+COMMENT:   #+CALL: include-all-org-files(i_level=<nubmer>, i_name=<string>, i_dir=<string>) :exports none :results raw
 #+COMMENT:
 #+COMMENT: All the call parameters are optional:
 #+COMMENT:
@@ -23,7 +23,7 @@
 #+COMMENT:
 #+COMMENT:   i_name : type    = a string
 #+COMMENT:            meaning = custom name for the start/end delimiters of the region that contains the
-#+COMMENT:                      `#+INCLUDE' filenames; use it when you #+CALL include-all-dir-org-files
+#+COMMENT:                      `#+INCLUDE' filenames; use it when you #+CALL include-all-org-files
 #+COMMENT:                      more than once in the same org file
 #+COMMENT:            default = no custom delimiter at all
 #+COMMENT:
@@ -38,7 +38,7 @@
 #+COMMENT:  
 #+COMMENT: ---------------------------------------------------------------------------------------------------------------
 
-#+NAME: include-all-dir-org-files
+#+NAME: include-all-org-files
 #+BEGIN_SRC emacs-lisp :exports none :results raw
   (let 
     ((tagname (concat "DYNAMIC_INCLUDES_DELIMITER" (if (boundp 'i_name) (format "_%s" (upcase i_name)) "")))
