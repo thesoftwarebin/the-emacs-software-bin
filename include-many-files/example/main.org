@@ -11,11 +11,10 @@
 * The Code examples I wrote
 
 #+COMMENT: hit C-c on the CALL here below to (re)generate the include list
-#+CALL: include-many-files(i_params="src c++ :minlevel 2 :exports both", i_delim_name="mycpp", i_dir="./examples", i_match="^.*\\.cpp$") :exports none :results raw
+#+CALL: include-many-files(i_params="src c++", i_delim_name="mycpp", i_dir="./examples", i_match="^.*\\.cpp$") :exports none :results raw
 
 * The Appendix I wrote
 
 #+COMMENT: hit C-c on the CALL here below to (re)generate the include list
 #+CALL: include-many-files(i_params=":minlevel 2", i_delim_name="myappendix", i_dir="./appendix") :exports none :results raw
-
 
