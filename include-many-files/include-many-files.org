@@ -18,7 +18,7 @@
 #+COMMENT: All the call parameters are optional:
 #+COMMENT:
 #+COMMENT:   i_params:      type    = a string
-#+COMMENT:                  meaning = additional parameters to pass to #+INCLUDE (typically ":minlevel 2" or similar)
+#+COMMENT:                  meaning = additional parameters to be passed to #+INCLUDE (typically ":minlevel 2" or similar)
 #+COMMENT:                  default = no additional params at all
 #+COMMENT:
 #+COMMENT:   i_delim_name : type    = a string
